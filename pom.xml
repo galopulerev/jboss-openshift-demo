@@ -20,6 +20,7 @@
         <version.plugin.wildfly>4.1.1.Final</version.plugin.wildfly>
         <version.plugin.war>3.3.2</version.plugin.war>
         <version.plugin.eap>1.0.0.Final-redhat-00014</version.plugin.eap>
+        <version.plugin.failsafe>2.22.2</version.plugin.failsafe>
     </properties>
 
     <repositories>
@@ -83,6 +84,11 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -154,6 +160,31 @@
                             <execution>
                                 <goals>
                                     <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>integration-testing</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${version.plugin.failsafe}</version>
+                        <configuration>
+                            <includes>
+                                <include>**/HelloWorldServletIT</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
                                 </goals>
                             </execution>
                         </executions>

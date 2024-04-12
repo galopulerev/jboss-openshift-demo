@@ -1,6 +1,6 @@
 build:
   uri: https://github.com/galopulerev/jboss-openshift-demo.git
   ref: main
-  contextDir: helloworld
+  contextDir:
 deploy:
   replicas: 1
